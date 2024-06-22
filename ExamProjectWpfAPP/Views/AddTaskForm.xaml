@@ -1,0 +1,53 @@
+﻿<Window x:Class="ExamProjectWpfAPP.Views.AddTaskForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExamProjectWpfAPP.Views"
+        xmlns:models="clr-namespace:ExamProjectWpfAPP.Models"
+        mc:Ignorable="d"
+            Title="AddTaskForm" Height="500" Width="300">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="Priorities" MethodName="GetValues" ObjectType="{x:Type models:Priority}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:Priority" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid Background="CornflowerBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+            <Label Foreground="White" FontSize="15" Width="185">Введите название задачи</Label>
+            <TextBox x:Name="nameTextBox" FontSize="20" Text="{Binding Name, Mode=OneWay}" Width="180" RenderTransformOrigin="0.5,0.5">
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-3.74"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.935"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <Label Foreground="White" FontSize="15" Width="185">Введите описание задачи</Label>
+            <TextBox Name="descriptionTextBox" Margin="10, 0, 10, 0" FontSize="20" Height="55" Text="{Binding Description, Mode=OneWay}"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center">
+            <Label Foreground="White" FontSize="15" Width="210">Выберите приоритет задачи</Label>
+            <ComboBox Name="priorityComboBox" Margin="10, 0, 10, 0" ItemsSource="{Binding Source={StaticResource Priorities}}"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" VerticalAlignment="Center">
+            <Label Foreground="White" FontSize="15" Width="190" Content="Отметьте статус задачи"/>
+            <CheckBox x:Name="statusCheckBox" IsChecked="{Binding IsCompleted, Mode=OneWay}" Height="30" Width="15"/>
+        </StackPanel>
+        <Button Name="saveButton" Grid.Row="4" Margin="112,1,118,29" FontSize="20" FontWeight="Bold" 
+            Background="CadetBlue" Foreground="White" BorderBrush="White" Click="SaveButton_Click">OK</Button>
+    </Grid>
+</Window>
